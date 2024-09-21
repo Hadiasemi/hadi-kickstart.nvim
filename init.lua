@@ -357,6 +357,14 @@ require('lazy').setup({
     config = function()
       require('noice').setup {
         -- add any options here
+        lsp = {
+          hover = {
+            enabled = false,  -- Disable hover pop-ups
+          },
+          signature = {
+            enabled = false,  -- Disable signature help pop-ups
+          },
+        },
         routes = {
           {
             filter = {
@@ -442,7 +450,14 @@ require('lazy').setup({
           -- NOTE: Remember that lua is a real programming language, and as such it is possible
           -- to define small helper and utility functions so you don't have to repeat yourself
           -- many times.
-          --
+          vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+            border = 'none',
+            focusable = false,
+          })
+          vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+            border = 'none',
+            focusable = false,
+          })
           -- In this case, we create a function that lets us more easily define mappings specific
           -- for LSP related items. It sets the mode, buffer and description for us each time.
           local map = function(keys, func, desc)
