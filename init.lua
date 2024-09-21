@@ -660,6 +660,10 @@ require('lazy').setup({
       luasnip.config.setup {}
 
       cmp.setup {
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = false,  -- Disable the documentation pop-up
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
